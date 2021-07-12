@@ -34,7 +34,18 @@ class UsersTests(unittest.TestCase):
 
     def test_invalid_email_registration(self):
         response = self.register('test2', 'test@example', 'FlaskIsAwesome')
+        #print("test invalid email: {}", response.data)
         self.assertIn(b'Invalid email address.', response.data)
+
+    def test_empty_email_registration(self):
+        response = self.register('123test', '', 'FlaskIsAwesome')
+        #print(response.data)
+        self.assertIn(b'This field is required', response.data)
+
+    def test_empty_password_registration(self):
+        response = self.register('123test', '123test@example', '')
+        #print(response.data)
+        self.assertIn(b'This field is required', response.data)
 
 
 if __name__ == "__main__":
