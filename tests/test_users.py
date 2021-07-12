@@ -38,7 +38,7 @@ class UsersTests(unittest.TestCase):
         response = self.register('test2', 'test@example', 'FlaskIsAwesome')
         self.assertIn(b'Invalid email address.', response.data)
         response = self.register('test3', 'testexample.com', 'FlaskIsAwesome')
-        self.assertIn(b'Invalid email address.', response.data))
+        self.assertIn(b'Invalid email address.', response.data)
 
     def test_empty_email_registration(self):
         response = self.register('123test', '', 'FlaskIsAwesome')
