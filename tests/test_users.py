@@ -31,11 +31,14 @@ class UsersTests(unittest.TestCase):
     def test_invalid_username_registration(self):
         response = self.register('t', 'test@example.com', 'FlaskIsAwesome')
         self.assertIn(b'Field must be between 2 and 20 characters long.', response.data)
-
+        response = self.register('thisIsMoreThan20Characters', 'test@example.com', 'FlaskIsAwesome')
+        self.assertIn(b'Field must be between 2 and 20 characters long.', response.data)
+        
     def test_invalid_email_registration(self):
         response = self.register('test2', 'test@example', 'FlaskIsAwesome')
-        #print("test invalid email: {}", response.data)
         self.assertIn(b'Invalid email address.', response.data)
+        response = self.register('test3', 'testexample.com', 'FlaskIsAwesome')
+        self.assertIn(b'Invalid email address.', response.data))
 
     def test_empty_email_registration(self):
         response = self.register('123test', '', 'FlaskIsAwesome')
